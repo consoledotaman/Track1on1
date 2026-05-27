@@ -1,0 +1,139 @@
+/* ── SOCIAL PROOF ── */
+.social-proof {
+  width: 100%;
+  background: var(--color-white);
+  padding: 100px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Stars */
+.social-proof__stars {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 32px;
+}
+.social-proof__star {
+  font-size: 28px;
+  color: var(--color-purple-3);
+  line-height: 1;
+}
+
+/* Quote */
+.social-proof__quote {
+  font-size: clamp(32px, 4.5vw, 60px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: var(--color-black);
+  max-width: 820px;
+  margin-bottom: 36px;
+  font-style: normal;
+}
+.social-proof__quote em {
+  font-style: italic;
+  font-weight: 800;
+}
+
+/* Author pill */
+.social-proof__author {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-white);
+  border: 1px solid #ebebf4;
+  border-radius: var(--radius-pill);
+  padding: 8px 20px 8px 8px;
+  margin-bottom: 56px;
+  box-shadow: 0 2px 12px rgba(130, 77, 255, 0.07);
+}
+.social-proof__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.social-proof__avatar-fallback {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-bg-tint);
+  color: var(--color-purple-3);
+  font-size: 12px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.social-proof__author-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-black);
+  letter-spacing: -0.01em;
+}
+
+/* Trusted label */
+.social-proof__trusted-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-grey);
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+/* Logo marquee */
+.social-proof__marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 12%,
+    black 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 12%,
+    black 88%,
+    transparent 100%
+  );
+}
+
+.social-proof__marquee {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marquee-fwd 28s linear infinite;
+}
+.social-proof__marquee:hover {
+  animation-play-state: paused;
+}
+
+.social-proof__logo-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 32px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-grey);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  border-right: 1px solid #ebebf0;
+}
+.social-proof__logo-icon {
+  font-size: 14px;
+  color: var(--color-border);
+}
+
+@keyframes marquee-fwd {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
