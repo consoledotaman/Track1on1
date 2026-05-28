@@ -17,20 +17,17 @@ export default function VSL() {
       const rect = section.getBoundingClientRect();
       const winH = window.innerHeight;
 
-      // Start animating when the top of the section enters from the bottom
-      // Complete the transition when the section hits the upper center area
       const startPoint = winH;
       const endPoint = winH * 0.15;
 
       const totalDistance = startPoint - endPoint;
       const currentProgress = (startPoint - rect.top) / totalDistance;
 
-      // Bound securely between 0 and 1
       setScrollProgress(Math.min(1, Math.max(0, currentProgress)));
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Trigger instantly on initial mount
+    handleScroll(); 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -40,27 +37,24 @@ export default function VSL() {
     video?.play();
   };
 
-  // Interpolate progressive cinematic styling values
-  const cardScale     = 0.9 + scrollProgress * 0.1;               // Scales 0.90 -> 1.00
-  const cardRotateX   = (1 - scrollProgress) * 16;                // Tilts 16deg -> 0deg flat
-  const cardTranslate = (1 - scrollProgress) * 40;                // Rises 40px up
-  const ambientBlur   = (1 - scrollProgress) * 8;                 // Decays 8px blur down to 0
+  // Interpolate progressive cinematic styling values (Removed Blur calculations)
+  const cardScale     = 0.92 + scrollProgress * 0.08;             // Smoothly scales 0.92 -> 1.00
+  const cardRotateX   = (1 - scrollProgress) * 12;                // Tilts 12deg -> 0deg flat
+  const cardTranslate = (1 - scrollProgress) * 45;                // Rises 45px up cleanly
 
   return (
     <section className="vsl glass-bg" id="demo" ref={sectionRef}>
       <div className="vsl__container">
 
-        {/* Cinematic Animated Video Wrapper Wrapper */}
+        {/* Cinematic Animated Video Wrapper WITHOUT Blur Filters */}
         <div 
           className="vsl__perspective-wrapper"
           style={{
             transform: `perspective(1200px) rotateX(${cardRotateX}deg) translateY(${cardTranslate}px) scale(${cardScale})`,
-            filter: `blur(${ambientBlur}px)`,
-            opacity: Math.min(1, scrollProgress / 0.3) // Fades in quickly over first 30%
+            opacity: Math.min(1, scrollProgress / 0.25) // Smoothly fades in completely within the first 25% of view
           }}
         >
           <div className="vsl__card">
-            {/* Overlay — shown until user clicks play */}
             {!playing && (
               <div className="vsl__overlay" onClick={handlePlay}>
                 <img
@@ -91,12 +85,12 @@ export default function VSL() {
           </div>
         </div>
 
-        {/* Trust strip below card — fades up elegantly alongside the progress */}
+        {/* Trust strip below card */}
         <div 
           className="vsl__trust"
           style={{
-            transform: `translateY(${(1 - scrollProgress) * 16}px)`,
-            opacity: Math.max(0, (scrollProgress - 0.4) / 0.6) // Only appears when video is mostly set
+            transform: `translateY(${(1 - scrollProgress) * 20}px)`,
+            opacity: Math.max(0, (scrollProgress - 0.35) / 0.65) // Appears naturally once video layout settles down
           }}
         >
           {[
