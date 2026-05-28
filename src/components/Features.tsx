@@ -3,11 +3,11 @@ import "./Features.css";
 
 const ASSETS = {
   arch:          "/assets/features-arch.png",       
-  energy:        "/assets/feat-energy.png",          
-  analytics:     "/assets/feat-analytics.png",       
-  messaging:     "/assets/feat-messaging.png",       
-  globe:         "/assets/feat-globe.png",           
-  communication: "/assets/feat-communication.png",   
+  energy:        "/assets/energy.png",          
+  analytics:     "/assets/analytics.png",       
+  messaging:     "/assets/messaging.png",       
+  globe:         "/assets/globe.png",           
+  communication: "/assets/communication.png",   
 };
 
 const topCards = [

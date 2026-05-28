@@ -1,30 +1,29 @@
 import "./Integrations.css";
 
-// ── ASSET PLACEHOLDERS ───────────────────────────────────────────────
 const LOGOS = [
-  { name: "Whop",          src: "/assets/logos/whop.png"          },
-  { name: "Stripe",        src: "/assets/logos/stripe.png"        },
-  { name: "YouTube",       src: "/assets/logos/youtube.png"       },
-  { name: "Twitter / X",   src: "/assets/logos/twitter.webp"       },
-  { name: "Instagram",     src: "/assets/logos/instagram.png"     },
-  { name: "Skool",         src: "/assets/logos/skool.png"         },
-  { name: "Telegram",      src: "/assets/logos/telegram.png"      },
-  { name: "Cloudflare",    src: "/assets/logos/cloudflare.svg"    },
-  { name: "Calendly",      src: "/assets/logos/calendly.png"      },
-  { name: "Close CRM",     src: "/assets/logos/close.png"         },
-  { name: "iClosed",       src: "/assets/logos/iclosed.svg"       },
-  { name: "HubSpot",       src: "/assets/logos/hubspot.png"       },
-  { name: "WebinarJam",    src: "/assets/logos/webinarjam.svg"    },
-  { name: "AEvent",        src: "/assets/logos/aevent.svg"        },
-  { name: "GoHighLevel",   src: "/assets/logos/gohighlevel.svg"   },
-  { name: "Teachable",     src: "/assets/logos/teachable.png"     },
-  { name: "Fanbasis",      src: "/assets/logos/fanbasis.svg"      },
-  { name: "ClickFunnels",  src: "/assets/logos/clickfunnels.png"  },
-  { name: "Framer",        src: "/assets/logos/framer.png"        },
-  { name: "Kit",           src: "/assets/logos/kit.svg"           },
-  { name: "Cal",           src: "/assets/logos/cal.svg"           },
-  { name: "Tally",         src: "/assets/logos/tally.svg"         },
-  { name: "Typeform",      src: "/assets/logos/typeform.png"      },
+  { name: "Whop",         src: "/assets/logos/whop.png"          },
+  { name: "Stripe",       src: "/assets/logos/stripe.png"        },
+  { name: "YouTube",      src: "/assets/logos/youtube.png"       },
+  { name: "Twitter / X",  src: "/assets/logos/twitter.webp"      },
+  { name: "Instagram",    src: "/assets/logos/instagram.png"     },
+  { name: "Skool",        src: "/assets/logos/skool.png"         },
+  { name: "Telegram",     src: "/assets/logos/telegram.png"      },
+  { name: "Cloudflare",   src: "/assets/logos/cloudflare.svg"    },
+  { name: "Calendly",     src: "/assets/logos/calendly.png"      },
+  { name: "Close CRM",    src: "/assets/logos/close.png"         },
+  { name: "iClosed",      src: "/assets/logos/iclosed.svg"       },
+  { name: "HubSpot",      src: "/assets/logos/hubspot.svg"       },
+  { name: "WebinarJam",   src: "/assets/logos/webinarjam.png"    },
+  { name: "AEvent",       src: "/assets/logos/aevent.png"        },
+  { name: "GoHighLevel",  src: "/assets/logos/gohighlevel.png"   },
+  { name: "Teachable",    src: "/assets/logos/teachable.png"     },
+  { name: "Fanbasis",     src: "/assets/logos/fanbasis.png"      },
+  { name: "ClickFunnels", src: "/assets/logos/clickfunnels.png"  },
+  { name: "Framer",       src: "/assets/logos/framer.png"        },
+  { name: "Kit",          src: "/assets/logos/kit.png"           },
+  { name: "Cal",          src: "/assets/logos/cal.svg"           },
+  { name: "Tally",        src: "/assets/logos/tally.png"         },
+  { name: "Typeform",     src: "/assets/logos/typeform.png"      },
 ];
 
 // Duplicate for seamless infinite scroll matching your SocialProof file logic
@@ -56,9 +55,12 @@ export default function Integrations() {
                   src={company.src}
                   alt={company.name}
                   className="social-proof__logo-img"
+                  style={{ opacity: 0, transition: 'opacity 0.2s' }}
+                  onLoad={(e) => {
+                    e.currentTarget.style.opacity = '0.65';
+                  }}
                   onError={(e) => {
-                    // Quick fallback behavior in case an image breaks
-                    e.currentTarget.style.display = "none";
+                    e.currentTarget.style.display = 'none';
                   }}
                 />
                 {company.name}

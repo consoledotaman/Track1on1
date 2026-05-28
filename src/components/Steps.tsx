@@ -5,33 +5,33 @@ import "./Steps.css";
 const STEPS = [
   {
     num: "01",
-    tag: "Data Sources",
-    title: "Connect Your Data",
-    desc: "Seamlessly integrate all your key data sources whether it's databases, spreadsheets, APIs or third party tools using our intuitive no code connectors. You can unify structured and unstructured data with minimal setup ensuring every decision starts with a complete picture.",
+    tag: "Setup",
+    title: "Connect Your Accounts",
+    desc: "Link your YouTube, Instagram, and Twitter in one click. Track 1on1 scans your videos, reels, and posts and deploys Smart Links automatically. No developer needed, no code, no setup headache.",
   },
   {
     num: "02",
-    tag: "Smart Cleanup",
-    title: "Clean & Organize Instantly",
-    desc: "Our smart data engine automatically detects inconsistencies, outliers and formatting issues. Within seconds you can standardize datasets, define schemas and apply transformation logic without writing a single line of code. Clean trustworthy data becomes your new default.",
+    tag: "Smart Links",
+    title: "Smart Links Deploy Instantly",
+    desc: "The moment you connect, Track 1on1 attaches a Smart Link to every post across every platform — automatically. When someone clicks, we follow that exact visitor through your page, your video, and your checkout.",
   },
   {
     num: "03",
-    tag: "Clear Insights",
-    title: "Visualize with Purpose",
-    desc: "Turn your refined data into clear impactful dashboards. Choose from pre built templates or design custom visualizations that align with your KPIs. Whether you need trends, comparisons or deep insights, every chart is crafted to drive confident decision making.",
+    tag: "Visitor Intelligence",
+    title: "Watch How Visitors Behave",
+    desc: "See how far people scroll, how long they stay, and whether they watched your sales video or just closed the tab. See the exact minute in your YouTube video where people paused and clicked the link to your page.",
   },
   {
     num: "04",
-    tag: "Team Access",
-    title: "Collaborate Across Teams",
-    desc: "Easily share insights across departments, clients or leadership teams. Set granular permissions, create workflows and control visibility. With built in comments and version history your entire team stays aligned and data literate with no extra tools needed.",
+    tag: "Revenue Attribution",
+    title: "See Which Post Made You Money",
+    desc: "Every time someone buys your course, Track 1on1 shows you exactly which Instagram reel, YouTube video, or tweet sent them to you. No more guessing which content is actually working.",
   },
   {
     num: "05",
-    tag: "Live Actions",
-    title: "Act on Your Insights",
-    desc: "Move from insight to action in real time. Trigger automated reports, sync filtered data to other tools or use built in webhooks to activate workflows. With decisions driven by live data your business becomes faster, leaner and infinitely more scalable.",
+    tag: "Growth",
+    title: "Spy, Optimize & Scale",
+    desc: "Type in any competitor's YouTube, Instagram, or Twitter account and see which of their posts get the most engagement — then get a ready-made content outline to create your own version. Stop guessing what to post next.",
   },
 ];
 
