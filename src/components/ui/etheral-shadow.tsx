@@ -1,4 +1,5 @@
-import React, { useRef, useId, useEffect, CSSProperties } from 'react';
+import { useRef, useId, useEffect } from 'react';
+import type { CSSProperties } from 'react';
 
 interface AnimationConfig {
   preview?: boolean;
