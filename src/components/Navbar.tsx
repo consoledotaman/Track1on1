@@ -1,6 +1,5 @@
 import "./Navbar.css";
 
-// Replace with your downloaded logo asset
 const LOGO_SRC = "/assets/logo.svg";
 
 const navLinks = [
@@ -21,21 +20,16 @@ export default function Navbar() {
           onError={(e) => {
             e.currentTarget.style.display = "none";
             const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
-            if (fallback) {
-              fallback.style.display = "block";
-            }
+            if (fallback) fallback.style.display = "block";
           }}
         />
-        {/* Fallback text logo — hidden once real asset loads */}
         <span className="navbar__logo-fallback">Purply</span>
       </a>
 
       <ul className="navbar__links">
         {navLinks.map(({ label, href }) => (
           <li key={href}>
-            <a href={href} className="navbar__link">
-              {label}
-            </a>
+            <a href={href} className="navbar__link">{label}</a>
           </li>
         ))}
       </ul>

@@ -57,7 +57,7 @@ export default function Steps() {
       // Overall section scroll progress 0..1
       // We want the animation to run from when the section enters
       // the viewport until it fully exits at the top.
-      const raw = (-sectionTop) / (sectionH - winH * 0.5);
+      const raw = (winH * 0.65 - sectionTop) / (sectionH - winH * 0.35);
       const total = Math.min(1, Math.max(0, raw));
 
       // Line fills proportionally across all steps
@@ -82,6 +82,13 @@ export default function Steps() {
 
   return (
     <section className="steps" id="how-it-works" ref={sectionRef}>
+
+      {/* Section header */}
+      <div className="steps__head">
+        <span className="steps__section-label">How it Works</span>
+        <h2 className="steps__section-title">From raw data to action<br />in five steps</h2>
+      </div>
+
       <div className="steps__container" ref={containerRef}>
 
         {/* Single vertical track line — the filled purple line rides on top */}

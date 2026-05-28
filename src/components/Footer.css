@@ -3,11 +3,12 @@
   width: 100%;
   background: #ffffff;
   overflow: hidden;
+  border-top: 1px solid var(--border);
 }
 
-/* ── Top white section ── */
+/* ── Top section ── */
 .footer__top {
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 72px 40px 64px;
   display: grid;
@@ -16,77 +17,46 @@
   align-items: start;
 }
 
-/* Brand */
 .footer__brand { display: flex; flex-direction: column; gap: 16px; max-width: 300px; }
-
-.footer__logo-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.footer__logo-row { display: flex; align-items: center; gap: 12px; }
 .footer__logo-wrap {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: #F0F0FF;
+  background: var(--purple-100);
+  border: 1px solid var(--purple-200);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
 }
-.footer__logo {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-.footer__brand-name {
-  font-size: 20px;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  color: #121212;
-}
-.footer__tagline {
-  font-size: 14px;
-  color: #595269;
-  line-height: 1.65;
-  letter-spacing: -0.01em;
-}
+.footer__logo { width: 24px; height: 24px; object-fit: contain; }
+.footer__brand-name { font-size: 20px; font-weight: 900; letter-spacing: -0.03em; color: var(--text); }
+.footer__tagline { font-size: 14px; color: var(--text-3); line-height: 1.65; letter-spacing: -0.01em; }
 .footer__cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 11px 20px;
   border-radius: 12px;
-  border: 1.5px solid #e0e0e8;
+  border: 1.5px solid var(--border-2);
   background: #ffffff;
   font-size: 14px;
   font-weight: 600;
-  color: #121212;
+  color: var(--text);
   letter-spacing: -0.01em;
   text-decoration: none;
   width: fit-content;
-  transition: background 0.15s;
+  transition: all 0.2s;
 }
-.footer__cta:hover { background: #F7F8FF; }
+.footer__cta:hover { background: var(--purple-50); border-color: rgba(139,92,246,0.25); }
 
-/* Cols */
 .footer__col { display: flex; flex-direction: column; gap: 16px; }
-.footer__col-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: #121212;
-  letter-spacing: -0.01em;
-}
+.footer__col-title { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
 .footer__col-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.footer__link {
-  font-size: 14px;
-  color: #595269;
-  text-decoration: none;
-  letter-spacing: -0.01em;
-  transition: color 0.15s;
-}
-.footer__link:hover { color: #121212; }
+.footer__link { font-size: 14px; color: var(--text-3); text-decoration: none; letter-spacing: -0.01em; transition: color 0.15s; }
+.footer__link:hover { color: var(--purple-600); }
 
 /* ── Wordmark area ── */
 .footer__wordmark-wrap {
@@ -98,41 +68,33 @@
   align-items: flex-end;
   justify-content: center;
 }
-
-/* White-to-purple gradient that fades the page into the purple */
 .footer__gradient-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
     #ffffff 0%,
-    rgba(255,255,255,0.55) 25%,
-    #4B0FD4 65%,
-    #3300FF 100%
+    rgba(255,255,255,0.5) 30%,
+    rgba(109,40,217,0.55) 70%,
+    rgba(91,33,182,0.85) 100%
   );
   pointer-events: none;
 }
-
-/* Giant italic wordmark */
 .footer__wordmark-text {
   position: relative;
   z-index: 1;
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
   font-size: clamp(72px, 14vw, 210px);
-  font-weight: 900;
+  font-weight: 700;
   font-style: italic;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
   line-height: 1;
   padding-bottom: 0.04em;
   width: 100%;
   text-align: center;
-  /* Transparent with white gradient fill + stroke */
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.22);
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.5) 0%,
-    rgba(255,255,255,0.08) 100%
-  );
+  -webkit-text-stroke: 1.5px rgba(109,40,217,0.20);
+  background-image: linear-gradient(to bottom, rgba(109,40,217,0.35) 0%, rgba(91,33,182,0.08) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   user-select: none;
@@ -140,63 +102,44 @@
 
 /* ── Bottom bar ── */
 .footer__bottom {
-  background: #3300FF;
+  background: var(--purple-700);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 40px;
 }
-.footer__copy {
-  font-size: 13px;
-  color: rgba(255,255,255,0.65);
-  letter-spacing: -0.01em;
-}
+.footer__copy { font-size: 13px; color: rgba(255,255,255,0.60); letter-spacing: -0.01em; }
 
-/* Floating pill CTA */
 .footer__pill-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.22);
   border-radius: 12px;
   padding: 9px 16px;
   font-size: 13px;
   font-weight: 600;
-  color: #121212;
+  color: #ffffff;
   text-decoration: none;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  transition: background 0.15s;
+  transition: all 0.2s;
   letter-spacing: -0.01em;
 }
-.footer__pill-cta:hover { background: #F0F0FF; }
+.footer__pill-cta:hover { background: rgba(255,255,255,0.25); }
 .footer__pill-logo {
   width: 20px;
   height: 20px;
   border-radius: 6px;
-  background: #F0F0FF;
+  background: rgba(255,255,255,0.18);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
 }
-.footer__pill-logo-img {
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
-}
+.footer__pill-logo-img { width: 14px; height: 14px; object-fit: contain; }
 
-/* ── Responsive ── */
 @media (max-width: 768px) {
-  .footer__top {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 48px 24px 40px;
-  }
-  .footer__bottom {
-    padding: 16px 20px;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-  }
+  .footer__top { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px 40px; }
+  .footer__bottom { padding: 16px 20px; flex-wrap: wrap; gap: 12px; justify-content: center; }
 }

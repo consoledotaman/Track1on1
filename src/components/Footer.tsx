@@ -68,14 +68,8 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="footer__bottom">
-        <p className="footer__copy">All rights reserved. © 2025</p>
-        <a href="#pricing" className="footer__pill-cta">
-          <div className="footer__pill-logo">
-            <img src={LOGO_SRC} alt="" className="footer__pill-logo-img"
-              onError={(e) => { e.currentTarget.style.display = "none"; }} />
-          </div>
-          Start Free Trial
-        </a>
+        <p className="footer__copy">All rights reserved. © 2026</p>
+       
         <p className="footer__copy">© Track 1on1</p>
       </div>
 

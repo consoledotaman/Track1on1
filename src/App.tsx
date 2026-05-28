@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navbar       from './components/Navbar';
 import Hero         from './components/Hero';
 import VSL          from './components/VSL';
@@ -11,6 +12,24 @@ import Pricing      from './components/Pricing';
 import Footer       from './components/Footer';
 
 export default function App() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    const targets = document.querySelectorAll('.reveal');
+    targets.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -25,5 +44,5 @@ export default function App() {
       <Pricing />
       <Footer />
     </>
-  )
+  );
 }

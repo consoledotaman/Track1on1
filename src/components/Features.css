@@ -1,74 +1,60 @@
 /* ── FEATURES SECTION ── */
 .features {
   width: 100%;
-  background: var(--color-white);
-  padding-bottom: 80px;
+  background: var(--bg);
+  padding-bottom: 100px;
 }
 
-/* ── Arch decoration ── */
+/* ── Section label ── */
 .features__arch-wrap {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  height: 200px;
-  margin-bottom: 40px;
-  overflow: hidden;
+  align-items: center;
+  height: 80px;
+  margin-bottom: 32px;
+  padding-top: 16px;
 }
-
-.features__arch-img {
-  /* the full-width arch PNG — should be transparent bg */
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 200px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* "Features" pill label that sits in the arch gap */
+.features__arch-img { display: none; }
 .features__arch-label {
-  position: relative;
-  z-index: 2;
-  background: var(--color-white);
-  border: 1px solid #e8e8f0;
+  display: inline-flex;
+  align-items: center;
+  background: var(--purple-100);
+  border: 1px solid var(--purple-200);
   border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-mid-2);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--purple-600);
   padding: 6px 18px;
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 /* ── Section heading ── */
 .features__head {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 56px;
   padding: 0 24px;
 }
-
 .features__title {
-  font-size: clamp(36px, 4.5vw, 58px);
+  font-size: clamp(36px, 4.5vw, 60px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -0.03em;
-  color: var(--color-black);
+  color: var(--text);
   margin-bottom: 16px;
 }
-
 .features__sub {
   font-size: 15px;
   font-weight: 400;
-  color: var(--color-grey);
+  color: var(--text-3);
   line-height: 1.65;
   letter-spacing: -0.01em;
 }
 
 /* ── Cards container ── */
 .features__container {
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
@@ -77,91 +63,79 @@
 }
 
 /* ── Rows ── */
-.features__row {
-  display: grid;
-  gap: 16px;
-}
-
-.features__row--3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.features__row--2 {
-  /* wide card ~55%, narrow ~45% */
-  grid-template-columns: 1fr 1fr;
-}
+.features__row { display: grid; gap: 16px; }
+.features__row--3 { grid-template-columns: repeat(3, 1fr); }
+.features__row--2 { grid-template-columns: 1fr 1fr; }
 
 /* ── Feature card ── */
 .feat-card {
-  background: var(--color-bg-soft);
+  background: #ffffff;
+  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  cursor: default;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.feat-card:hover {
+  border-color: rgba(139,92,246,0.25);
+  box-shadow: 0 4px 32px rgba(139,92,246,0.10), 0 8px 24px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
 }
 
-/* Image area — taller on wide card */
+/* Top purple accent line */
+.feat-card::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(139,92,246,0.4) 50%, transparent 100%);
+}
+
+/* Image area */
 .feat-card__img-wrap {
   width: 100%;
   height: 220px;
   overflow: hidden;
-  background: var(--color-bg-tint);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--purple-50);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.feat-card--wide .feat-card__img-wrap {
-  height: 280px;
-}
+.feat-card--wide .feat-card__img-wrap { height: 280px; }
 
 .feat-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transition: transform 0.5s ease;
 }
+.feat-card:hover .feat-card__img { transform: scale(1.04); }
 
 /* Text body */
-.feat-card__body {
-  padding: 20px 24px 28px;
-}
-
+.feat-card__body { padding: 22px 26px 30px; }
 .feat-card__title {
   font-size: 17px;
   font-weight: 700;
-  color: var(--color-black);
+  color: var(--text);
   letter-spacing: -0.02em;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
-
 .feat-card__desc {
   font-size: 14px;
   font-weight: 400;
-  color: var(--color-grey);
-  line-height: 1.6;
+  color: var(--text-3);
+  line-height: 1.65;
   letter-spacing: -0.01em;
 }
 
-/* ── Responsive ── */
 @media (max-width: 900px) {
-  .features__row--3 {
-    grid-template-columns: 1fr 1fr;
-  }
-  .features__row--2 {
-    grid-template-columns: 1fr;
-  }
+  .features__row--3 { grid-template-columns: 1fr 1fr; }
+  .features__row--2 { grid-template-columns: 1fr; }
 }
-
 @media (max-width: 600px) {
-  .features__row--3 {
-    grid-template-columns: 1fr;
-  }
-  .features__arch-wrap {
-    height: 140px;
-  }
-  .features__arch-img {
-    height: 140px;
-  }
+  .features__row--3 { grid-template-columns: 1fr; }
+  .features__arch-wrap { height: 60px; }
 }

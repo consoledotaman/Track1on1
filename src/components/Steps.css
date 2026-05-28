@@ -1,12 +1,41 @@
 /* ── STEPS SECTION ── */
 .steps {
   width: 100%;
-  background: var(--color-white);
-  padding: 80px 24px 120px;
+  background: var(--bg-2);
+  padding: 80px 24px 140px;
+}
+
+/* Section header */
+.steps__head {
+  text-align: center;
+  margin-bottom: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.steps__section-label {
+  display: inline-block;
+  background: var(--purple-100);
+  color: var(--purple-600);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--purple-200);
+}
+.steps__section-title {
+  font-size: clamp(36px, 4.5vw, 58px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text);
 }
 
 .steps__container {
-  max-width: 760px;
+  max-width: 780px;
   margin: 0 auto;
   position: relative;
   display: flex;
@@ -14,30 +43,23 @@
 }
 
 /* ── Vertical track ── */
-/* The grey rail sits behind everything */
 .steps__track {
   position: absolute;
-  left: 42px;               /* lines up with center of dot */
+  left: 42px;
   top: 24px;
   bottom: 24px;
   width: 2px;
-  background: #ececf4;      /* faint grey rail */
+  background: rgba(0,0,0,0.07);
   border-radius: 2px;
   overflow: hidden;
   pointer-events: none;
 }
-
-/* Purple fill that grows from top as user scrolls */
 .steps__track-fill {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    var(--color-purple-2) 0%,
-    var(--color-purple-dark) 100%
-  );
+  background: linear-gradient(to bottom, var(--purple-400) 0%, var(--purple-600) 100%);
   transform-origin: top center;
-  transform: scaleY(0);     /* driven by JS */
+  transform: scaleY(0);
   border-radius: 2px;
   transition: transform 0.12s linear;
 }
@@ -49,11 +71,9 @@
   gap: 0 32px;
   position: relative;
   min-height: 220px;
-  padding-bottom: 60px;
+  padding-bottom: 64px;
 }
-.steps__item:last-child {
-  padding-bottom: 0;
-}
+.steps__item:last-child { padding-bottom: 0; }
 
 /* ── Left col ── */
 .steps__left {
@@ -64,38 +84,37 @@
   position: relative;
   z-index: 1;
 }
-
 .steps__dot-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   transition: opacity 0.4s ease;
 }
-
-/* Circle dot that sits on the track */
 .steps__dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 2px solid #d0cce8;
-  background: var(--color-white);
+  border: 2px solid rgba(0,0,0,0.14);
+  background: #ffffff;
   transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
   flex-shrink: 0;
 }
 .steps__dot--active {
-  border-color: var(--color-purple-2);
-  background: var(--color-purple-2);
-  box-shadow: 0 0 0 4px rgba(130, 77, 255, 0.18);
+  border-color: var(--purple-500);
+  background: var(--purple-500);
+  box-shadow: 0 0 0 5px rgba(139,92,246,0.15), 0 0 16px var(--glow);
 }
-
-/* Big purple number */
 .steps__num {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
   font-size: 52px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.04em;
-  color: var(--color-purple-2);
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, var(--purple-500) 0%, var(--purple-700) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: block;
   margin-top: 4px;
 }
@@ -104,65 +123,42 @@
 .steps__content {
   padding-top: 0;
   will-change: opacity, transform;
-  /* transition gives smoothness between scroll ticks */
   transition: opacity 0.15s linear, transform 0.15s linear;
 }
-
-/* Tag pill */
 .steps__tag {
   display: inline-block;
-  background: var(--color-purple-2);
-  color: var(--color-white);
+  background: var(--purple-100);
+  color: var(--purple-600);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   padding: 4px 12px;
   border-radius: var(--radius-pill);
-  margin-bottom: 12px;
+  border: 1px solid var(--purple-200);
+  margin-bottom: 14px;
 }
-
-/* Title */
 .steps__title {
   font-size: clamp(22px, 2.8vw, 30px);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  color: var(--color-black);
-  margin-bottom: 12px;
+  color: var(--text);
+  margin-bottom: 14px;
 }
-
-/* Description */
 .steps__desc {
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.7;
-  color: var(--color-grey);
+  line-height: 1.75;
+  color: var(--text-3);
   letter-spacing: -0.01em;
   max-width: 480px;
   margin-bottom: 24px;
 }
+.steps__btn { font-size: 14px; padding: 11px 20px; border-radius: var(--radius-md); }
 
-/* Button */
-.steps__btn {
-  font-size: 14px;
-  padding: 11px 20px;
-  border-radius: var(--radius-md);
-}
-
-/* ── Responsive ── */
 @media (max-width: 600px) {
-  .steps__track {
-    left: 28px;
-  }
-  .steps__item {
-    grid-template-columns: 60px 1fr;
-    gap: 0 16px;
-  }
-  .steps__num {
-    font-size: 36px;
-  }
-  .steps__item {
-    min-height: 180px;
-    padding-bottom: 48px;
-  }
+  .steps__track { left: 28px; }
+  .steps__item { grid-template-columns: 60px 1fr; gap: 0 16px; min-height: 180px; padding-bottom: 48px; }
+  .steps__num { font-size: 36px; }
 }

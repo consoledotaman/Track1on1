@@ -1,13 +1,18 @@
 import "./SocialProof.css";
 
-// Replace with real avatar asset
 const AVATAR_SRC = "/assets/peter-design.jpg";
 
-const companies = ["Own Corp", "Clonor AI", "Pulse AI"];
+const COMPANIES = [
+  { src: "/assets/logos/instagram.png", alt: "Instagram", name: "Instagram" },
+  { src: "/assets/logos/stripe.webp",   alt: "Stripe",    name: "Stripe" },
+  { src: "/assets/logos/twitter.webp",  alt: "Twitter",   name: "Twitter" },
+  { src: "/assets/logos/whop.webp",     alt: "Whop",      name: "Whop" },
+  { src: "/assets/logos/youtube.webp",  alt: "YouTube",   name: "YouTube" },
+];
 
 export default function SocialProof() {
   // Duplicate for seamless infinite scroll
-  const logos = [...companies, ...companies, ...companies];
+  const logos = [...COMPANIES, ...COMPANIES];
 
   return (
     <section className="social-proof">
@@ -46,10 +51,14 @@ export default function SocialProof() {
       {/* Logo marquee */}
       <div className="social-proof__marquee-wrap">
         <div className="social-proof__marquee">
-          {logos.map((name, i) => (
+          {logos.map((company, i) => (
             <span key={i} className="social-proof__logo-item">
-              <span className="social-proof__logo-icon">✳</span>
-              {name}
+              <img
+                src={company.src}
+                alt={company.alt}
+                className="social-proof__logo-img"
+              />
+              {company.name}
             </span>
           ))}
         </div>

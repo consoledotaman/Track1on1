@@ -22,6 +22,18 @@ const OTHERS = [
 export default function Comparison() {
   return (
     <section className="comparison" id="comparison">
+
+      {/* Section header */}
+      <div className="comparison__head">
+        <span className="comparison__section-label">Why us</span>
+        <h2 className="comparison__section-title">
+          Track 1on1 vs. Everyone Else
+        </h2>
+        <p className="comparison__section-sub">
+          The difference between guessing and knowing exactly what drives revenue.
+        </p>
+      </div>
+
       <div className="comparison__container">
 
         {/* ── Left card — Track 1on1 ── */}

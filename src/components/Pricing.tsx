@@ -93,7 +93,7 @@ function CheckIcon({ featured }: { featured: boolean }) {
     <svg className="pricing__check-icon" width="15" height="12" viewBox="0 0 15 12" fill="none">
       <path
         d="M1 6L5.5 10.5L14 1"
-        stroke={featured ? "rgba(255,255,255,0.7)" : "#8554FF"}
+        stroke={featured ? "#6d28d9" : "#8B5CF6"}
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -107,6 +107,17 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="pricing">
+
+      {/* Section heading */}
+      <div className="pricing__head">
+        <span className="pricing__section-label">Pricing</span>
+        <h2 className="pricing__section-title">
+          Simple, transparent pricing
+        </h2>
+        <p className="pricing__section-sub">
+          Choose the plan that fits your growth stage. Cancel anytime.
+        </p>
+      </div>
 
       {/* Toggle */}
       <div className="pricing__toggle">
