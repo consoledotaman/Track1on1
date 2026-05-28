@@ -1,9 +1,9 @@
 /* ── STEPS SECTION ── */
 .steps {
   width: 100%;
-  /* background: rgba(248,245,255,0.45);
+  background: rgba(248,245,255,0.45);
   backdrop-filter: blur(8px) saturate(150%);
-  -webkit-backdrop-filter: blur(8px) saturate(150%); */
+  -webkit-backdrop-filter: blur(8px) saturate(150%);
   padding: 80px 24px 140px;
 }
 
