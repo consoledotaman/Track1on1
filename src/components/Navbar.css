@@ -11,9 +11,9 @@
   padding: 0 20px;
   height: 56px;
   width: min(94vw, 1040px);
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.645);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 18px;
   box-shadow:

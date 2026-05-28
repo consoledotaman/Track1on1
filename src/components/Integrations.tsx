@@ -1,67 +1,38 @@
 import "./Integrations.css";
 
 // ── ASSET PLACEHOLDERS ───────────────────────────────────────────────
-// Add your logo files to /assets/logos/ and update the src fields.
-// Each logo should ideally be an SVG or PNG with transparent background.
-// Recommended size: height 28–32px, any width.
-
 const LOGOS = [
-  { name: "Whop",          src: "/assets/logos/whop.webp"          },
-  { name: "Stripe",        src: "/assets/logos/stripe.webp"        },
-  { name: "YouTube",       src: "/assets/logos/youtube.webp"       },
+  { name: "Whop",          src: "/assets/logos/whop.png"          },
+  { name: "Stripe",        src: "/assets/logos/stripe.png"        },
+  { name: "YouTube",       src: "/assets/logos/youtube.png"       },
   { name: "Twitter / X",   src: "/assets/logos/twitter.webp"       },
   { name: "Instagram",     src: "/assets/logos/instagram.png"     },
-  { name: "Skool",         src: "/assets/logos/skool.svg"         },
-  { name: "Telegram",      src: "/assets/logos/telegram.svg"      },
+  { name: "Skool",         src: "/assets/logos/skool.png"         },
+  { name: "Telegram",      src: "/assets/logos/telegram.png"      },
   { name: "Cloudflare",    src: "/assets/logos/cloudflare.svg"    },
-  { name: "Calendly",      src: "/assets/logos/calendly.svg"      },
-  { name: "Close CRM",     src: "/assets/logos/close.svg"         },
+  { name: "Calendly",      src: "/assets/logos/calendly.png"      },
+  { name: "Close CRM",     src: "/assets/logos/close.png"         },
   { name: "iClosed",       src: "/assets/logos/iclosed.svg"       },
-  { name: "HubSpot",       src: "/assets/logos/hubspot.svg"       },
+  { name: "HubSpot",       src: "/assets/logos/hubspot.png"       },
   { name: "WebinarJam",    src: "/assets/logos/webinarjam.svg"    },
   { name: "AEvent",        src: "/assets/logos/aevent.svg"        },
   { name: "GoHighLevel",   src: "/assets/logos/gohighlevel.svg"   },
-  { name: "Teachable",     src: "/assets/logos/teachable.svg"     },
+  { name: "Teachable",     src: "/assets/logos/teachable.png"     },
   { name: "Fanbasis",      src: "/assets/logos/fanbasis.svg"      },
-  { name: "ClickFunnels",  src: "/assets/logos/clickfunnels.svg"  },
-  { name: "Framer",        src: "/assets/logos/framer.svg"        },
+  { name: "ClickFunnels",  src: "/assets/logos/clickfunnels.png"  },
+  { name: "Framer",        src: "/assets/logos/framer.png"        },
   { name: "Kit",           src: "/assets/logos/kit.svg"           },
   { name: "Cal",           src: "/assets/logos/cal.svg"           },
   { name: "Tally",         src: "/assets/logos/tally.svg"         },
-  { name: "Typeform",      src: "/assets/logos/typeform.svg"      },
+  { name: "Typeform",      src: "/assets/logos/typeform.png"      },
 ];
 
-// Duplicate so the marquee loops seamlessly
-const ROW1 = [...LOGOS, ...LOGOS];
-const ROW2 = [...LOGOS].reverse();
-const ROW2_DUP = [...ROW2, ...ROW2];
-
-interface LogoItemProps {
-  name: string;
-  src: string;
-}
-
-function LogoItem({ name, src }: LogoItemProps) {
-  return (
-    <div className="integ__logo-item">
-      <img
-        src={src}
-        alt={name}
-        className="integ__logo-img"
-        onError={(e) => {
-          // fallback: hide broken img, show text name
-          e.currentTarget.style.display = "none";
-          (e.currentTarget.nextElementSibling as HTMLElement).style.display = "block";
-        }}
-      />
-      <span className="integ__logo-name-fallback">{name}</span>
-    </div>
-  );
-}
+// Duplicate for seamless infinite scroll matching your SocialProof file logic
+const logosTrack = [...LOGOS, ...LOGOS];
 
 export default function Integrations() {
   return (
-    <section className="integ" id="integrations">
+    <section className="integ glass-bg" id="integrations">
       <div className="integ__container">
 
         {/* Heading */}
@@ -76,23 +47,22 @@ export default function Integrations() {
           </p>
         </div>
 
-        {/* Marquee rows */}
-        <div className="integ__marquee-wrap">
-          {/* Fade edges */}
-          <div className="integ__fade integ__fade--left"  aria-hidden="true" />
-          <div className="integ__fade integ__fade--right" aria-hidden="true" />
-
-          {/* Row 1 — left to right */}
-          <div className="integ__track integ__track--fwd">
-            {ROW1.map((logo, i) => (
-              <LogoItem key={i} {...logo} />
-            ))}
-          </div>
-
-          {/* Row 2 — right to left */}
-          <div className="integ__track integ__track--rev">
-            {ROW2_DUP.map((logo, i) => (
-              <LogoItem key={i} {...logo} />
+        {/* Logo marquee layout exactly from your SocialProof code */}
+        <div className="social-proof__marquee-wrap">
+          <div className="social-proof__marquee">
+            {logosTrack.map((company, i) => (
+              <span key={i} className="social-proof__logo-item">
+                <img
+                  src={company.src}
+                  alt={company.name}
+                  className="social-proof__logo-img"
+                  onError={(e) => {
+                    // Quick fallback behavior in case an image breaks
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+                {company.name}
+              </span>
             ))}
           </div>
         </div>

@@ -15,7 +15,7 @@ export default function SocialProof() {
   const logos = [...COMPANIES, ...COMPANIES];
 
   return (
-    <section className="social-proof">
+    <section className="social-proof glass-bg">
       {/* Stars */}
       <div className="social-proof__stars" aria-label="5 stars">
         {[1,2,3,4,5].map(i => (

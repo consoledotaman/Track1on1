@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LiquidButton } from "./ui/liquid-glass-button";
 import "./Hero.css";
 
 const ICON_SRC = "/assets/diamond-icon.png";
@@ -7,7 +8,7 @@ export default function Hero() {
   const [iconError, setIconError] = useState(false);
 
   return (
-    <section className="hero">
+    <section className="hero glass-bg">
       {/* Purple ambient blobs */}
       <div className="hero__blob"  aria-hidden="true" />
       <div className="hero__blob-2" aria-hidden="true" />
@@ -26,9 +27,9 @@ export default function Hero() {
 
           {/* Headline */}
           <h1 className="hero__title">
-            Transform your
+            See Exactly Which
             <br />
-            <em>Data</em> into
+            <em>Posts</em> are
             <span className="hero__inline-icon">
               {!iconError ? (
                 <img
@@ -40,23 +41,28 @@ export default function Hero() {
                 <span className="hero__inline-icon-fallback">◆</span>
               )}
             </span>
-            Scalable
+            Making
             <br />
-            Actionable <em>Solutions</em>
+            you <em>Money</em>
           </h1>
 
           {/* Subtext */}
           <p className="hero__sub">
-            Unlock insights, drive decisions, and accelerate
+            Stop posting blind. Track 1on1 connects every sale back to the content that caused it
             <br />
-            your business with intelligent data solutions.
+            across YouTube, Instagram, and Twitter. 
           </p>
 
           {/* Buttons */}
           <div className="hero__btns">
-            <a href="#pricing" className="btn-black">
-              Get Template <span className="arrow">↗</span>
-            </a>
+            <LiquidButton
+              size="xl"
+              variant="purple"
+              className="min-w-[200px] px-12" 
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Join Waitlist<span style={{ display:'inline-block', transform:'rotate(-45deg)', fontSize:'16px' }}>↗</span>
+            </LiquidButton>
             <a href="#pricing" className="btn-outline">
               See Our Pricing
             </a>
@@ -76,9 +82,9 @@ export default function Hero() {
           </div>
         </div>
         {/* ── Left: hero image ── */}
-        <div className="hidden md:block hero__image-col" aria-hidden="true">
+        {/* <div className="hidden md:block hero__image-col" aria-hidden="true">
           <img src="/assets/hero.png" alt="" className="hero__img" />
-        </div>
+        </div> */}
 
       </div>
     </section>

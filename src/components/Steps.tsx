@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { LiquidButton } from "./ui/liquid-glass-button"; // ── 1. IMPORT THE LIQUID BUTTON ──
 import "./Steps.css";
 
 const STEPS = [
@@ -37,11 +38,8 @@ const STEPS = [
 export default function Steps() {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const lineTrackRef = useRef<HTMLDivElement>(null);
 
-  // progress[i] = 0..1 for each step's content fade
   const [progress, setProgress] = useState<number[]>(STEPS.map(() => 0));
-  // lineProgress = 0..1 for the full vertical line fill
   const [lineProgress, setLineProgress] = useState(0);
 
   useEffect(() => {
@@ -54,21 +52,13 @@ export default function Steps() {
       const sectionH   = section.offsetHeight;
       const winH       = window.innerHeight;
 
-      // Overall section scroll progress 0..1
-      // We want the animation to run from when the section enters
-      // the viewport until it fully exits at the top.
       const raw = (winH * 0.65 - sectionTop) / (sectionH - winH * 0.35);
       const total = Math.min(1, Math.max(0, raw));
-
-      // Line fills proportionally across all steps
       setLineProgress(total);
 
-      // Each step occupies an equal slice of total progress
       const slice = 1 / STEPS.length;
       const newProgress = STEPS.map((_, i) => {
         const start = i * slice;
-        const end   = start + slice;
-        // Content fades in as its slice begins, fades out when next slice ends
         const p = (total - start) / slice;
         return Math.min(1, Math.max(0, p));
       });
@@ -76,22 +66,18 @@ export default function Steps() {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // run once on mount
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <section className="steps" id="how-it-works" ref={sectionRef}>
+    <section className="steps glass-bg" id="how-it-works" ref={sectionRef}>
 
       {/* Section header */}
-      <div className="steps__head">
-        <span className="steps__section-label">How it Works</span>
-        <h2 className="steps__section-title">From raw data to action<br />in five steps</h2>
-      </div>
 
       <div className="steps__container" ref={containerRef}>
 
-        {/* Single vertical track line — the filled purple line rides on top */}
+        {/* Single vertical track line */}
         <div className="steps__track">
           <div
             className="steps__track-fill"
@@ -101,14 +87,8 @@ export default function Steps() {
 
         {STEPS.map((step, i) => {
           const p = progress[i];
-          // Fade in: 0→1 over first 60% of the step's slice
-          // Fade out: 1→0 over last 40% (only for steps that aren't last)
-          const fadeIn  = Math.min(1, p / 0.6);
-          const fadeOut = i < STEPS.length - 1
-            ? Math.max(0, 1 - (p - 0.6) / 0.4)
-            : 1;
-          const opacity   = fadeIn * fadeOut;
-          const translateY = (1 - fadeIn) * 32; // slides up as it fades in
+          const opacity = Math.min(1, p / 0.4);
+          const translateY = (1 - opacity) * 24; 
 
           return (
             <div key={step.num} className="steps__item">
@@ -116,9 +96,9 @@ export default function Steps() {
               <div className="steps__left">
                 <div
                   className="steps__dot-wrap"
-                  style={{ opacity: Math.min(1, p / 0.3) }}
+                  style={{ opacity: Math.min(1, p / 0.2) }}
                 >
-                  <div className={`steps__dot ${p > 0.05 ? "steps__dot--active" : ""}`} />
+                  <div className={`steps__dot ${p > 0.02 ? "steps__dot--active" : ""}`} />
                   <span className="steps__num">{step.num}</span>
                 </div>
               </div>
@@ -134,9 +114,16 @@ export default function Steps() {
                 <span className="steps__tag">{step.tag}</span>
                 <h3 className="steps__title">{step.title}</h3>
                 <p className="steps__desc">{step.desc}</p>
-                <a href="#pricing" className="btn-black steps__btn">
-                  Get Started <span className="arrow">↗</span>
-                </a>
+                
+                {/* ── 2. REPLACED WITH LIQUID BUTTON ── */}
+                <LiquidButton
+                  size="md"
+                  variant="purple"
+                  className="w-fit min-w-[140px] h-10 px-6 flex items-center justify-center text-sm font-medium tracking-tight"
+                  onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Get Started <span style={{ display: 'inline-block', transform: 'rotate(-45deg)', fontSize: '13px', marginLeft: '4px' }}>↗</span>
+                </LiquidButton>
               </div>
             </div>
           );

@@ -21,7 +21,7 @@ const OTHERS = [
 
 export default function Comparison() {
   return (
-    <section className="comparison" id="comparison">
+    <section className="comparison glass-bg" id="comparison">
 
       {/* Section header */}
       <div className="comparison__head">

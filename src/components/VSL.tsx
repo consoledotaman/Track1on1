@@ -1,12 +1,38 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./VSL.css";
 
-// Replace with your real video source when ready
 const VIDEO_SRC = "/assets/demo.mp4";
-const POSTER_SRC = "/assets/demo-poster.jpg"; // optional thumbnail
+const POSTER_SRC = "/assets/demo-poster.jpg"; 
 
 export default function VSL() {
   const [playing, setPlaying] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const winH = window.innerHeight;
+
+      // Start animating when the top of the section enters from the bottom
+      // Complete the transition when the section hits the upper center area
+      const startPoint = winH;
+      const endPoint = winH * 0.15;
+
+      const totalDistance = startPoint - endPoint;
+      const currentProgress = (startPoint - rect.top) / totalDistance;
+
+      // Bound securely between 0 and 1
+      setScrollProgress(Math.min(1, Math.max(0, currentProgress)));
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Trigger instantly on initial mount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handlePlay = () => {
     setPlaying(true);
@@ -14,62 +40,65 @@ export default function VSL() {
     video?.play();
   };
 
+  // Interpolate progressive cinematic styling values
+  const cardScale     = 0.9 + scrollProgress * 0.1;               // Scales 0.90 -> 1.00
+  const cardRotateX   = (1 - scrollProgress) * 16;                // Tilts 16deg -> 0deg flat
+  const cardTranslate = (1 - scrollProgress) * 40;                // Rises 40px up
+  const ambientBlur   = (1 - scrollProgress) * 8;                 // Decays 8px blur down to 0
+
   return (
-    <section className="vsl" id="demo">
+    <section className="vsl glass-bg" id="demo" ref={sectionRef}>
       <div className="vsl__container">
 
-        {/* Top label */}
-        <div className="vsl__head">
-          <span className="vsl__label">See It In Action</span>
-          <h2 className="vsl__title">
-            Watch How Purply<br />Transforms Your Data
-          </h2>
-          <p className="vsl__sub">
-            See how teams go from raw data to actionable insights
-            in minutes — no setup required.
-          </p>
+        {/* Cinematic Animated Video Wrapper Wrapper */}
+        <div 
+          className="vsl__perspective-wrapper"
+          style={{
+            transform: `perspective(1200px) rotateX(${cardRotateX}deg) translateY(${cardTranslate}px) scale(${cardScale})`,
+            filter: `blur(${ambientBlur}px)`,
+            opacity: Math.min(1, scrollProgress / 0.3) // Fades in quickly over first 30%
+          }}
+        >
+          <div className="vsl__card">
+            {/* Overlay — shown until user clicks play */}
+            {!playing && (
+              <div className="vsl__overlay" onClick={handlePlay}>
+                <img
+                  src={POSTER_SRC}
+                  alt=""
+                  className="vsl__poster"
+                  onError={(e) => (e.currentTarget.style.display = "none")}
+                />
+
+                <div className="vsl__glow" aria-hidden="true" />
+
+                <button className="vsl__play-btn" aria-label="Play demo video">
+                  <span className="vsl__play-icon">▶</span>
+                </button>
+
+                <span className="vsl__duration">2:34</span>
+              </div>
+            )}
+
+            <video
+              id="vsl-video"
+              className="vsl__video"
+              src={VIDEO_SRC}
+              poster={POSTER_SRC}
+              controls={playing}
+              playsInline
+            />
+          </div>
         </div>
 
-        {/* Video card */}
-        <div className="vsl__card">
-
-          {/* Overlay — shown until user clicks play */}
-          {!playing && (
-            <div className="vsl__overlay" onClick={handlePlay}>
-              {/* Poster image — falls back to gradient */}
-              <img
-                src={POSTER_SRC}
-                alt=""
-                className="vsl__poster"
-                onError={(e) => (e.currentTarget.style.display = "none")}
-              />
-
-              {/* Purple glow behind play button */}
-              <div className="vsl__glow" aria-hidden="true" />
-
-              {/* Play button */}
-              <button className="vsl__play-btn" aria-label="Play demo video">
-                <span className="vsl__play-icon">▶</span>
-              </button>
-
-              {/* Duration badge */}
-              <span className="vsl__duration">2:34</span>
-            </div>
-          )}
-
-          {/* Actual video element */}
-          <video
-            id="vsl-video"
-            className="vsl__video"
-            src={VIDEO_SRC}
-            poster={POSTER_SRC}
-            controls={playing}
-            playsInline
-          />
-        </div>
-
-        {/* Trust strip below card */}
-        <div className="vsl__trust">
+        {/* Trust strip below card — fades up elegantly alongside the progress */}
+        <div 
+          className="vsl__trust"
+          style={{
+            transform: `translateY(${(1 - scrollProgress) * 16}px)`,
+            opacity: Math.max(0, (scrollProgress - 0.4) / 0.6) // Only appears when video is mostly set
+          }}
+        >
           {[
             { value: "10k+", label: "Active users" },
             { value: "4.9",  label: "Average rating" },

@@ -106,7 +106,7 @@ export default function Pricing() {
   const [yearly, setYearly] = useState(false);
 
   return (
-    <section id="pricing" className="pricing">
+    <section id="pricing " className="pricing glass-bg">
 
       {/* Section heading */}
       <div className="pricing__head">

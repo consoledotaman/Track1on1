@@ -18,7 +18,7 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer glass-bg">
 
       {/* Top — white section */}
       <div className="footer__top">
@@ -34,7 +34,7 @@ export default function Footer() {
             Stop posting blind. Track 1on1 connects every sale back to the
             content that caused it — across YouTube, Instagram, and Twitter.
           </p>
-          <a href="#pricing" className="footer__cta">Start Free Trial For Free</a>
+          <a href="#pricing" className="footer__cta">Join Waitlist</a>
         </div>
 
         <div className="footer__col">

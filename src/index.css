@@ -1,12 +1,17 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300..700&display=swap');
 
 /* ── RESET ── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* ── TAILWIND CUSTOM ANIMATIONS ── */
+@theme {
+  --animate-aurora: aurora 60s linear infinite;
 }
 
 /* ── DESIGN TOKENS ── */
@@ -68,6 +73,10 @@
   --font-sans:    'Inter', 'Space Grotesk', sans-serif;
   --font-display: 'Space Grotesk', 'Inter', sans-serif;
 
+  /* Aurora helpers */
+  --white:       #ffffff;
+  --transparent: transparent;
+
   --radius-sm:   8px;
   --radius-md:   12px;
   --radius-lg:   16px;
@@ -76,6 +85,17 @@
 }
 
 /* ── KEYFRAMES ── */
+
+@keyframes aurora {
+  from { background-position: 50% 50%, 50% 50%; }
+  to   { background-position: 350% 50%, 350% 50%; }
+}
+
+@keyframes moveBackground {
+  from { background-position: 0% 0%; }
+  to   { background-position: 0% -1000%; }
+}
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -132,52 +152,120 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: var(--font-sans);
-  background: var(--bg);
+  font-family: Inter, sans-serif;
+  background: transparent;
   color: var(--text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle dot-grid background texture */
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Inter, "Inter Placeholder", sans-serif;
+}
+
+p {
+  font-family: Inter, sans-serif;
+}
+
+span {
+  font-family: "Instrument Serif", "Instrument Serif Placeholder", serif;
+}
+
+/* Buttons and their children stay in Inter */
+button,
+button span,
+a.btn-black,
+a.btn-black span,
+a.btn-outline,
+a.btn-outline span,
+nav span,
+nav a {
+  font-family: Inter, "Inter Placeholder", sans-serif;
+}
+
+/* Subtle dot-grid background texture — sits above the aurora */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(rgba(139,92,246,0.06) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-image: radial-gradient(rgba(139,92,246,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
-section, nav, footer { position: relative; z-index: 1; }
+section, nav, footer {
+  position: relative;
+  z-index: 1;
+  /* Glass section borders for depth between panels */
+  border-top: 1px solid rgba(255,255,255,0.40);
+  border-bottom: 1px solid rgba(255,255,255,0.20);
+}
+
+/* ── GLASS UTILITY ── */
+/* Applied to sections and cards to create frosted-glass effect over the aurora */
+.glass-section {
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.30);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(14px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  box-shadow: 0 2px 20px rgba(139,92,246,0.08), 0 1px 0 rgba(255,255,255,0.8) inset !important;
+}
+
+.glass-card--purple {
+  background: rgba(237, 233, 254, 0.68) !important;
+  backdrop-filter: blur(14px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+  border: 1px solid rgba(167,139,250,0.40) !important;
+}
 
 a   { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 ul  { list-style: none; }
 
-/* ── SHARED BUTTONS ── */
+/* ── SHARED BUTTONS — Liquid Glass ── */
 .btn-black {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--purple-500) 0%, var(--purple-600) 50%, var(--purple-700) 100%);
-  background-size: 200% 200%;
-  color: #ffffff;
+  position: relative;
+  color: var(--purple-700);
   font-family: var(--font-sans);
   font-size: 15px;
-  font-weight: 600;
-  padding: 14px 26px;
-  border-radius: var(--radius-md);
-  border: none;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(139,92,246,0.35);
   cursor: pointer;
   letter-spacing: -0.01em;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 24px var(--glow);
+  transition: transform 0.25s cubic-bezier(0.175,0.885,0.32,2.2),
+              box-shadow 0.25s ease;
+  background: rgba(237,233,254,0.55);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow:
+    0 0 6px rgba(0,0,0,0.03),
+    0 2px 8px rgba(0,0,0,0.08),
+    inset 2px 2px 1px rgba(255,255,255,0.55),
+    inset -1px -1px 1px rgba(255,255,255,0.45),
+    0 0 12px rgba(139,92,246,0.12);
+  text-decoration: none;
 }
 .btn-black:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 40px var(--glow), 0 0 0 1px rgba(139,92,246,0.2);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    0 6px 24px rgba(139,92,246,0.25),
+    inset 2px 2px 1px rgba(255,255,255,0.6),
+    inset -1px -1px 1px rgba(255,255,255,0.5);
 }
 .btn-black .arrow {
   display: inline-block;
@@ -189,19 +277,39 @@ ul  { list-style: none; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
-  color: var(--text);
+  position: relative;
+  color: var(--text-2);
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 500;
-  padding: 13px 22px;
-  border-radius: var(--radius-md);
-  border: 1.5px solid var(--border-2);
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.55);
   cursor: pointer;
   letter-spacing: -0.01em;
-  transition: all 0.22s ease;
+  transition: transform 0.25s cubic-bezier(0.175,0.885,0.32,2.2),
+              box-shadow 0.25s ease;
+  background: rgba(255,255,255,0.40);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  box-shadow:
+    0 0 6px rgba(0,0,0,0.03),
+    0 2px 8px rgba(0,0,0,0.06),
+    inset 2px 2px 1px rgba(255,255,255,0.6),
+    inset -1px -1px 1px rgba(255,255,255,0.4);
+  text-decoration: none;
 }
 .btn-outline:hover {
-  border-color: rgba(139,92,246,0.35);
-  box-shadow: 0 4px 16px var(--glow-2);
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(139,92,246,0.30);
+  box-shadow:
+    0 4px 16px rgba(139,92,246,0.12),
+    inset 2px 2px 1px rgba(255,255,255,0.65),
+    inset -1px -1px 1px rgba(255,255,255,0.5);
+}
+
+.glass-bg{
+  background: rgba(255,255,255,0.48);
+  backdrop-filter: blur(8px) saturate(150%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%); 
 }

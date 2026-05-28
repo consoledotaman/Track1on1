@@ -1,5 +1,5 @@
 import "./Navbar.css";
-
+import { LiquidButton } from "./ui/liquid-glass-button";
 const LOGO_SRC = "/assets/logo.svg";
 
 const navLinks = [
@@ -34,8 +34,15 @@ export default function Navbar() {
         ))}
       </ul>
 
-      <a href="#pricing" className="navbar__cta">
-        Get Template
+      <a href="#pricing" >
+        <LiquidButton
+                          size="md"
+                          variant="purple"
+                          className="w-fit min-w-[140px] h-10 px-6 flex items-center justify-center text-sm font-medium tracking-tight"
+                          onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
+                          Join Waitlist
+                        </LiquidButton>
       </a>
     </nav>
   );

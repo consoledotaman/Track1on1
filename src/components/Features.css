@@ -1,33 +1,48 @@
-/* ── FEATURES SECTION ── */
+/* ==========================================================================
+   ── FEATURES SECTION ──
+   ========================================================================== */
 .features {
   width: 100%;
-  background: var(--bg);
-  padding-bottom: 100px;
+  padding-bottom: 120px;
+  overflow: hidden;
 }
 
-/* ── Section label ── */
+/* ── Section label / Arch ── */
 .features__arch-wrap {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 80px;
-  margin-bottom: 32px;
-  padding-top: 16px;
+  align-items: flex-end; 
+  height: 120px;         
+  margin-bottom: 24px;
+  padding-top: 40px;
 }
-.features__arch-img { display: none; }
+
+.features__arch-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -56%); 
+  width: 340px;        
+  height: auto;
+  object-fit: contain;
+  pointer-events: none; 
+  z-index: 0;           
+}
+
 .features__arch-label {
+  position: relative;
+  z-index: 1;           
   display: inline-flex;
   align-items: center;
-  background: var(--purple-100);
-  border: 1px solid var(--purple-200);
-  border-radius: var(--radius-pill);
+  background: #ffffff;  
+  border: 1px solid rgba(0, 0, 0, 0.08); 
+  border-radius: var(--radius-pill, 99px);
   font-size: 12px;
-  font-weight: 600;
-  color: var(--purple-600);
-  padding: 6px 18px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-weight: 500;
+  color: #111111;       
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); 
 }
 
 /* ── Section heading ── */
@@ -52,7 +67,7 @@
   letter-spacing: -0.01em;
 }
 
-/* ── Cards container ── */
+/* ── Cards Grid Layout ── */
 .features__container {
   max-width: 1160px;
   margin: 0 auto;
@@ -62,80 +77,130 @@
   gap: 16px;
 }
 
-/* ── Rows ── */
-.features__row { display: grid; gap: 16px; }
-.features__row--3 { grid-template-columns: repeat(3, 1fr); }
-.features__row--2 { grid-template-columns: 1fr 1fr; }
+.features__row { 
+  display: grid; 
+  gap: 16px; 
+}
+.features__row--3 { 
+  grid-template-columns: repeat(3, 1fr); 
+}
+.features__row--2 { 
+  grid-template-columns: 1.6fr 1fr; 
+}
 
-/* ── Feature card ── */
+/* ==========================================================================
+   ── LIQUID GLASS FEATURE CARDS ──
+   ========================================================================== */
 .feat-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.40); 
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.50); 
+  border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
   cursor: default;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-}
-.feat-card:hover {
-  border-color: rgba(139,92,246,0.25);
-  box-shadow: 0 4px 32px rgba(139,92,246,0.10), 0 8px 24px rgba(0,0,0,0.06);
-  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02), 
+              0 12px 36px rgba(139, 92, 246, 0.03);
+  position: relative;
+  
+  /* ── Hardware Acceleration Hooks ── */
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  transition: border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              background-color 0.3s ease,
+              transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) !important; 
 }
 
-/* Top purple accent line */
+/* Inner light-reflection gloss overlay */
 .feat-card::before {
   content: "";
-  display: block;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(139,92,246,0.4) 50%, transparent 100%);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 40%, rgba(139,92,246,0.08) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 2;
 }
 
-/* Image area */
+.feat-card:hover {
+  transform: translateY(-5px) scale(1.01) !important;
+  border-color: rgba(139, 92, 246, 0.35);
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 16px 44px rgba(139, 92, 246, 0.10), 
+              0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+/* Image Container Area */
 .feat-card__img-wrap {
   width: 100%;
-  height: 220px;
+  height: 200px;
   overflow: hidden;
-  background: var(--purple-50);
+  background: linear-gradient(180deg, rgba(243, 239, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 }
-.feat-card--wide .feat-card__img-wrap { height: 280px; }
+
+.feat-card--wide .feat-card__img-wrap { 
+  height: 220px; 
+}
 
 .feat-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.feat-card:hover .feat-card__img { transform: scale(1.04); }
+.feat-card:hover .feat-card__img { 
+  transform: scale(1.03); 
+}
 
-/* Text body */
-.feat-card__body { padding: 22px 26px 30px; }
+/* Text Body Content */
+.feat-card__body { 
+  padding: 24px 28px 28px; 
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .feat-card__title {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.02em;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
+
 .feat-card__desc {
   font-size: 14px;
   font-weight: 400;
   color: var(--text-3);
-  line-height: 1.65;
+  line-height: 1.6;
   letter-spacing: -0.01em;
 }
 
+/* ==========================================================================
+   ── RESPONSIVE RESPONDERS ──
+   ========================================================================== */
 @media (max-width: 900px) {
   .features__row--3 { grid-template-columns: 1fr 1fr; }
   .features__row--2 { grid-template-columns: 1fr; }
+  .feat-card--wide .feat-card__img-wrap { height: 200px; } 
 }
+
 @media (max-width: 600px) {
   .features__row--3 { grid-template-columns: 1fr; }
   .features__arch-wrap { height: 60px; }
+  .feat-card__body { padding: 20px 22px 24px; }
 }

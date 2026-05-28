@@ -1,7 +1,9 @@
 /* ── PRICING ── */
 .pricing {
   width: 100%;
-  background: var(--bg-3);
+  /* background: rgba(243,240,255,0.45);
+  backdrop-filter: blur(8px) saturate(150%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%); */
   padding: 80px 24px 120px;
   position: relative;
   overflow: hidden;
@@ -84,7 +86,9 @@
   left: 3px;
   width: 22px;
   height: 22px;
-  background: #ffffff;
+  background: rgba(255,255,255,0.52);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-radius: 50%;
   box-shadow: 0 1px 4px rgba(0,0,0,0.18);
   transition: transform 0.2s;
@@ -115,7 +119,9 @@
 .pricing__card {
   border-radius: 24px;
   border: 1px solid var(--border);
-  background: #ffffff;
+  background: rgba(255,255,255,0.52);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   overflow: hidden;
   transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
   box-shadow: 0 2px 16px rgba(0,0,0,0.05);
@@ -128,7 +134,9 @@
 
 .pricing__card--featured {
   border: 1px solid rgba(139,92,246,0.35);
-  background: linear-gradient(160deg, #f5f3ff 0%, #ede9fe 40%, #ddd6fe 100%);
+  background: rgba(237,233,254,0.52);
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
   box-shadow:
     0 0 0 1px rgba(167,139,250,0.30),
     0 12px 48px rgba(139,92,246,0.18);
