@@ -51,8 +51,10 @@ const bottomCards = [
 export default function Features() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isArchVisible, setIsArchVisible] = useState(false);
 
   useEffect(() => {
+    // 1. Continuous scroll listener kept exclusively for the fluid cards
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
@@ -67,17 +69,36 @@ export default function Features() {
       setScrollProgress(Math.min(1, Math.max(0, progress)));
     };
 
+    // 2. Intersection Observer to trigger the isolated, non-broken arch animation
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsArchVisible(true);
+          observer.disconnect(); // Runs the clean sunrise fade once and keeps it there
+        }
+      },
+      { threshold: 0.12 } // Triggers slightly before the heading comes up
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const getCardStyles = (index: number, rowOffset: number) => {
     const delayFactor = (index + rowOffset) * 0.12; 
     const localProgress = Math.min(1, Math.max(0, (scrollProgress - delayFactor) / (1 - delayFactor)));
 
-    const translateY = (1 - localProgress) * 45; // Smoothly floats 45px up
-    const scale = 0.96 + localProgress * 0.04;    // Subtle 3D pop up scale
+    const translateY = (1 - localProgress) * 45; 
+    const scale = 0.96 + localProgress * 0.04;    
 
     return {
       transform: `translateY(${translateY}px) scale(${scale})`,
@@ -86,8 +107,11 @@ export default function Features() {
   };
 
   return (
-    <section className="features glass-bg" id="features" ref={sectionRef}>
-
+    <section 
+      className={`features glass-bg ${isArchVisible ? "features--visible" : ""}`} 
+      id="features" 
+      ref={sectionRef}
+    >
       {/* Arch decoration */}
       <div className="features__arch-wrap" aria-hidden="true">
         <img src={ASSETS.arch} alt="" className="features__arch-img" />
@@ -107,7 +131,6 @@ export default function Features() {
 
       {/* Cards */}
       <div className="features__container">
-
         {/* Top row — 3 equal columns */}
         <div className="features__row features__row--3">
           {topCards.map((card, i) => (
@@ -145,7 +168,6 @@ export default function Features() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

@@ -143,14 +143,25 @@
   position: relative;
   top: -3px;
   animation: float 5s ease-in-out infinite;
+  
+  /* Smooth scale transition if screen resizes */
+  transition: width 0.2s ease, height 0.2s ease, border-radius 0.2s ease;
 }
-.hero__inline-icon img { width: 36px; height: 36px; object-fit: contain; }
+
+.hero__inline-icon img { 
+  width: 36px; 
+  height: 36px; 
+  object-fit: contain; 
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
 .hero__inline-icon-fallback {
   font-size: 26px;
   background: linear-gradient(135deg, var(--purple-500), var(--purple-700));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition: font-size 0.2s ease;
 }
 
 /* Subtext */
@@ -209,4 +220,22 @@
  
   .hero__title { font-size: clamp(36px, 8vw, 56px); }
   .hero__blob { width: 100%; opacity: 0.5; }
+}
+@media (max-width: 600px) {
+  .hero__inline-icon {
+    width: 42px;         /* Scaled down beautifully to fit inline text on mobile */
+    height: 42px;
+    border-radius: 10px;  /* Slightly sharper corner to fit the smaller size */
+    margin: 0 4px;
+    top: -2px;           /* Re-balanced optical alignment */
+  }
+  
+  .hero__inline-icon img { 
+    width: 24px;         /* Keeps the graphic proportional inside the chip */
+    height: 24px; 
+  }
+  
+  .hero__inline-icon-fallback {
+    font-size: 18px;     /* Prevents fallback diamond from overflowing */
+  }
 }

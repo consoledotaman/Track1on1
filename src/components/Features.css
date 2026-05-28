@@ -3,9 +3,10 @@
    ========================================================================== */
 .features {
   width: 100%;
+  padding-top: 100px; /* Generates elegant, generous space above on large screens */
   padding-bottom: 120px;
   overflow: hidden;
-  background: rgba(255,255,255,0.48);
+  background: rgba(255, 255, 255, 0.48);
   backdrop-filter: blur(8px) saturate(150%);
   -webkit-backdrop-filter: blur(8px) saturate(150%);
 }
@@ -17,25 +18,45 @@
   justify-content: center;
   align-items: flex-end; 
   height: 120px;         
-  margin-bottom: 24px;
+  margin-bottom: 32px; 
   padding-top: 40px;
 }
 
+/* ── Asynchronous Sunrise Entrance ── */
 .features__arch-img {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -56%); 
+  top: 50%;
+  
+  /* Initial state: Hidden and sitting flat behind the label white background */
+  transform: translate(-50%, -10%) scale(0.9);
+  opacity: 0;
+  
   width: 340px;        
+  max-width: 85vw; 
   height: auto;
   object-fit: contain;
   pointer-events: none; 
   z-index: 0;           
+  will-change: transform, opacity;
+  
+  /* Resets/Fixes */
+  background: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* The Active Sunrise Trigger */
+.features--visible .features__arch-img {
+  transform: translate(-50%, -56%) scale(1);
+  opacity: 1;
+  transition: opacity 0.8s ease-out,
+              transform 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .features__arch-label {
   position: relative;
-  z-index: 1;           
+  z-index: 1; /* Masking layer blocking the un-triggered arch */          
   display: inline-flex;
   align-items: center;
   background: #ffffff;  
@@ -45,7 +66,7 @@
   font-weight: 500;
   color: #111111;       
   padding: 6px 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); 
 }
 
 /* ── Section heading ── */
@@ -203,7 +224,18 @@
 }
 
 @media (max-width: 600px) {
+  .features { 
+    padding-top: 60px; 
+  }
   .features__row--3 { grid-template-columns: 1fr; }
-  .features__arch-wrap { height: 60px; }
+  .features__arch-wrap { 
+    height: 80px; 
+    margin-bottom: 24px;
+  }
+  
+  /* Adjusted mobile safety target transform anchors */
+  .features--visible .features__arch-img {
+    transform: translate(-50%, -54%) scale(1);
+  }
   .feat-card__body { padding: 20px 22px 24px; }
 }

@@ -1,6 +1,7 @@
 /* ── FAQ SECTION ── */
 .faq {
   width: 100%;
+  padding-top: 100px; /* Generates elegant, generous space above on large screens */
   padding-bottom: 120px;
   background: rgba(255,255,255,0.48);
   backdrop-filter: blur(8px) saturate(150%);
@@ -14,7 +15,7 @@
   justify-content: center;
   align-items: flex-end;
   height: 120px;         
-  margin-bottom: 24px;
+  margin-bottom: 32px; /* Increased to push heading further down */
   padding-top: 40px;
   background: transparent;
 }
@@ -25,6 +26,7 @@
   left: 50%;
   transform: translate(-50%, -56%); 
   width: 340px;      
+  max-width: 85vw; /* CRITICAL: Prevents the image from overflowing the viewport width on tiny phones */
   height: auto;
   object-fit: contain;
   pointer-events: none; 
@@ -183,14 +185,14 @@
 }
 
 .faq__item--open .faq__icon-cross::before {
-  transform: rotate(180deg); /* Remains horizontal */
+  transform: rotate(180deg); 
   background-color: var(--purple-600);
 }
 
 .faq__item--open .faq__icon-cross::after {
-  transform: rotate(90deg); /* Folds horizontal to blend seamlessly */
+  transform: rotate(90deg); 
   background-color: var(--purple-600);
-  opacity: 0; /* Safely vanishes to isolate perfect minus presentation */
+  opacity: 0; 
 }
 
 /* ── Pure CSS Grid Fluid Content Expansion Accordion Body ── */
@@ -240,13 +242,21 @@
 .faq__item--open .faq__a {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.08s; /* Wait for layout grid tracks to begin opening */
+  transition-delay: 0.08s; 
 }
 
 /* ── Responsive Screen Adjustments ── */
 @media (max-width: 768px) {
+  .faq { 
+    padding-top: 60px; /* Guarantees explicit clean spacing above the arch component on mobile viewports */
+  }
   .faq__container { grid-template-columns: 1fr; gap: 0; }
   .faq__col:last-child .faq__item:first-child { border-top: none; }
   .faq__title { font-size: 38px; }
+  
+  .faq__arch-wrap { 
+    height: 80px; /* Adjusted height to keep scale proportional with max-width restriction */
+    margin-bottom: 24px;
+  }
   .faq__item { transform: translateY(20px); }
 }

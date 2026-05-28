@@ -72,6 +72,19 @@
   align-items: flex-end;
   justify-content: center;
 }
+
+.footer__gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    rgba(255,255,255,0.5) 30%,
+    rgba(109,40,217,0.55) 70%,
+    rgba(91,33,182,0.85) 100%
+  );
+  pointer-events: none;
+}
 .footer__gradient-overlay {
   position: absolute;
   inset: 0;
@@ -88,19 +101,30 @@
   position: relative;
   z-index: 1;
   font-family: var(--font-display, 'Space Grotesk', sans-serif);
-  font-size: clamp(72px, 14vw, 210px);
-  font-weight: 700;
+  font-size: clamp(64px, 16vw, 210px); /* Slightly optimized scale for edge cases */
+  font-weight: 800;
   font-style: italic;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
   line-height: 1;
-  padding-bottom: 0.04em;
+  padding-bottom: 0.02em;
   width: 100%;
   text-align: center;
+  
+  /* ── Fix text wrapping ── */
+  white-space: nowrap; /* CRITICAL: Forces text to stay perfectly on a single line on mobile phones */
+  
+  /* ── Beautiful White Mask Gradient ── */
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(109,40,217,0.20);
-  background-image: linear-gradient(to bottom, rgba(109,40,217,0.35) 0%, rgba(91,33,182,0.08) 100%);
+  background-image: linear-gradient(
+    to bottom, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(255, 255, 255, 0.45) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
+  
+  /* Removed old dark lines to maintain a high-contrast premium feel */
+  -webkit-text-stroke: unset; 
   user-select: none;
 }
 
