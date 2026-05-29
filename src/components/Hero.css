@@ -195,9 +195,17 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    align-items: flex-start;
+    padding-top: 72px;
+    padding-bottom: 24px;
+  }
   .hero__layout {
     grid-template-columns: 1fr;
     min-height: auto;
+    margin-top: 0;
+    padding: 24px 20px 16px;
   }
   .hero__image-col {
     height: 45vw;
@@ -205,19 +213,13 @@
     max-height: 440px;
   }
   .hero__content {
-    padding: 48px 24px;
-  }
-  .hero__layout {
-    min-height: auto;
-  }
-  .hero__content {
-    padding: 80px 24px;
+    padding: 0;
   }
 }
 
 @media (max-width: 600px) {
+  .hero { min-height: auto; padding-top: 64px; padding-bottom: 20px; }
   .hero__image-col { height: 60vw; }
- 
   .hero__title { font-size: clamp(36px, 8vw, 56px); }
   .hero__blob { width: 100%; opacity: 0.5; }
 }

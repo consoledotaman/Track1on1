@@ -178,7 +178,7 @@
 }
 
 @media (max-width: 600px) {
-  .vsl { padding: 60px 16px; }
+  .vsl { padding: 36px 16px; }
   .vsl__container { gap: 32px; }
   .vsl__play-btn { width: 68px; height: 68px; }
   .vsl__play-icon { font-size: 22px; }

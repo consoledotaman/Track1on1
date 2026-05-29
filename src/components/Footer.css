@@ -66,77 +66,66 @@
 .footer__wordmark-wrap {
   position: relative;
   width: 100%;
-  height: clamp(140px, 20vw, 300px);
+  height: clamp(160px, 22vw, 320px);
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
+  background: transparent;
 }
 
 .footer__gradient-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    #ffffff 0%,
-    rgba(255,255,255,0.5) 30%,
-    rgba(109,40,217,0.55) 70%,
-    rgba(91,33,182,0.85) 100%
+  /* Soft purple glow from center — echoes the ethereal shadow bg */
+  background: radial-gradient(
+    ellipse 70% 90% at 50% 50%,
+    rgba(139, 92, 246, 0.10) 0%,
+    transparent 70%
   );
   pointer-events: none;
+  z-index: 0;
 }
-.footer__gradient-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    #ffffff 0%,
-    rgba(255,255,255,0.5) 30%,
-    rgba(109,40,217,0.55) 70%,
-    rgba(91,33,182,0.85) 100%
-  );
-  pointer-events: none;
-}
+
 .footer__wordmark-text {
   position: relative;
   z-index: 1;
-  font-family: var(--font-display, 'Space Grotesk', sans-serif);
-  font-size: clamp(64px, 16vw, 210px); /* Slightly optimized scale for edge cases */
-  font-weight: 800;
-  font-style: italic;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: min(14vw, 240px);
+  font-weight: 900;
+  font-style: normal;
   letter-spacing: -0.04em;
   line-height: 1;
-  padding-bottom: 0.02em;
   width: 100%;
   text-align: center;
-  
-  /* ── Fix text wrapping ── */
-  white-space: nowrap; /* CRITICAL: Forces text to stay perfectly on a single line on mobile phones */
-  
-  /* ── Beautiful White Mask Gradient ── */
+  white-space: nowrap;
+  user-select: none;
+
+  /* Purple text fading to transparent at the bottom */
   color: transparent;
   background-image: linear-gradient(
-    to bottom, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(255, 255, 255, 0.45) 100%
+    to bottom,
+    rgba(109, 40, 217, 0.55) 0%,
+    rgba(109, 40, 217, 0.30) 45%,
+    rgba(109, 40, 217, 0.08) 75%,
+    rgba(109, 40, 217, 0.00) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
-  
-  /* Removed old dark lines to maintain a high-contrast premium feel */
-  -webkit-text-stroke: unset; 
-  user-select: none;
 }
 
 /* ── Bottom bar ── */
 .footer__bottom {
-  background: var(--purple-700);
+  background: rgba(237, 233, 254, 0.55);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 40px;
+  border-top: 1px solid rgba(139, 92, 246, 0.15);
 }
-.footer__copy { font-size: 13px; color: rgba(255,255,255,0.60); letter-spacing: -0.01em; }
+.footer__copy { font-size: 13px; color: var(--text-3); letter-spacing: -0.01em; font-family: Inter, sans-serif; }
 
 .footer__pill-cta {
   display: inline-flex;
