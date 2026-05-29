@@ -26,7 +26,6 @@ const LOGOS = [
   { name: "Typeform",     src: "/assets/logos/typeform.png"      },
 ];
 
-// Duplicate for seamless infinite scroll matching your SocialProof file logic
 const logosTrack = [...LOGOS, ...LOGOS];
 
 export default function Integrations() {
@@ -46,34 +45,37 @@ export default function Integrations() {
           </p>
         </div>
 
-        {/* Logo marquee layout exactly from your SocialProof code */}
-        <div className="social-proof__marquee-wrap">
-          <div className="social-proof__marquee">
+        {/* Transparent Floating Marquee Track */}
+        <div className="integ__marquee-wrap">
+          <div className="integ__marquee">
             {logosTrack.map((company, i) => (
-              <span key={i} className="social-proof__logo-item">
-                <img
-                  src={company.src}
-                  alt={company.name}
-                  className="social-proof__logo-img"
-                  style={{ opacity: 0, transition: 'opacity 0.2s' }}
-                  onLoad={(e) => {
-                    e.currentTarget.style.opacity = '0.65';
-                  }}
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
-                {company.name}
-              </span>
+              <div key={i} className="integ__chip">
+                <div className="integ__chip-logo-wrap">
+                  <img
+                    src={company.src}
+                    alt={company.name}
+                    className="integ__chip-img"
+                    style={{ opacity: 0, transition: 'opacity 0.25s ease' }}
+                    onLoad={(e) => {
+                      e.currentTarget.style.opacity = '1';
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                </div>
+                <span className="integ__chip-name">{company.name}</span>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* CTA */}
+        {/* CTA with Upgraded Button Hook */}
         <div className="integ__cta">
           <p className="integ__cta-question">Don't see your tool?</p>
-          <a href="mailto:hello@purply.com" className="integ__cta-link">
-            Request an integration →
+          <a href="mailto:hello@purply.com" className="integ__btn">
+            Request an integration
+            <span className="integ__btn-arrow">→</span>
           </a>
           <p className="integ__cta-note">
             Tell us which tool you use and we'll prioritize it in our next release.

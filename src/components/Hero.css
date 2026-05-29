@@ -196,8 +196,8 @@
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .hero {
-    min-height: auto;
-    align-items: flex-start;
+    min-height: 100vh;
+    align-items: center;
     padding-top: 72px;
     padding-bottom: 24px;
   }
@@ -218,7 +218,7 @@
 }
 
 @media (max-width: 600px) {
-  .hero { min-height: auto; padding-top: 64px; padding-bottom: 20px; }
+  .hero { min-height: 100vh; padding-top: 64px; padding-bottom: 24px; }
   .hero__image-col { height: 60vw; }
   .hero__title { font-size: clamp(36px, 8vw, 56px); }
   .hero__blob { width: 100%; opacity: 0.5; }

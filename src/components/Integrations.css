@@ -1,12 +1,11 @@
 /* ── INTEGRATIONS ── */
 .integ {
   width: 100%;
-  background: rgba(248,245,255,0.45);
-  backdrop-filter: blur(8px) saturate(150%);
-  -webkit-backdrop-filter: blur(8px) saturate(150%);
-  padding: 80px 0 100px;
+  background: rgba(248, 245, 255, 0.45);
+  padding: 100px 0 120px;
   overflow: hidden;
 }
+
 .integ__container {
   display: flex;
   flex-direction: column;
@@ -25,22 +24,22 @@
 }
 .integ__label {
   display: inline-block;
-  background: var(--purple-100);
+  background: rgba(139, 92, 246, 0.08);
   color: var(--purple-600);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 6px 16px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--purple-200);
+  border-radius: var(--radius-pill, 99px);
+  border: 1px solid rgba(139, 92, 246, 0.15);
 }
 .integ__title {
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(34px, 4.5vw, 54px);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  color: var(--text);
+  color: var(--text, #111111);
 }
 .integ__sub {
   font-size: 15px;
@@ -48,76 +47,179 @@
   color: var(--text-3);
   line-height: 1.65;
   letter-spacing: -0.01em;
-  max-width: 460px;
+  max-width: 480px;
 }
 
-/* ── Logo Marquee Layer (Adapted from SocialProof) ── */
-.social-proof__marquee-wrap {
+/* ── Seamless Marquee Track ── */
+.integ__marquee-wrap {
   width: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  padding: 16px 0;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
-.social-proof__marquee {
+.integ__marquee {
   display: flex;
   width: max-content;
-  animation: marquee-fwd 28s linear infinite; /* Loops smoothly at 50% offset */
+  gap: 32px; /* Increased track gap to emphasize standalone floating items */
+  animation: marquee-fwd 38s linear infinite;
 }
 
-.social-proof__marquee:hover {
+.integ__marquee:hover .integ__chip {
   animation-play-state: paused;
 }
 
-/* Inline text + image structural rows matching SocialProof style */
-.social-proof__logo-item {
+/* ── Transparent Glassmorphic Pods ── */
+.integ__chip {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 32px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-3);
-  letter-spacing: -0.01em;
+  gap: 12px;
+  padding: 6px 16px 6px 6px;
+  background: rgba(255, 255, 255, 0.35); /* Pure crystal frosted texture */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.55); /* High contrast light ring */
+  border-radius: 14px;
   white-space: nowrap;
-  border-right: 1px solid var(--border);
+  
+  /* Soft micro depth map shadows */
+  box-shadow: 
+    0 4px 14px rgba(139, 92, 246, 0.04),
+    inset 0 1px 0px rgba(255, 255, 255, 0.4);
+    
+  transform: translateY(0);
+  transition: transform 0.25s cubic-bezier(0.2, 1, 0.4, 1), 
+              background-color 0.25s ease, 
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
 }
 
-.social-proof__logo-img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  opacity: 0.65;
+/* Floating Elevation Hover Effect */
+.integ__chip:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 
+    0 12px 28px rgba(139, 92, 246, 0.09),
+    inset 0 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+/* Image Containers - Completely Background-Free */
+.integ__chip-logo-wrap {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  background: transparent !important; /* No white background containers */
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* ── CTA ── */
+.integ__chip-img {
+  width: 26px; /* Slightly adjusted scale footprint */
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.06)); /* Gives logos crisp baseline floating separation */
+}
+
+.integ__chip-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text, #111111);
+  letter-spacing: -0.02em;
+}
+
+/* ── Premium Request Button ── */
 .integ__cta {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 16px; /* Optimized layout spacing */
   padding: 0 24px;
 }
-.integ__cta-question { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
-.integ__cta-link {
+.integ__cta-question { 
+  font-size: 15px; 
+  font-weight: 600; 
+  color: var(--text-3); 
+  letter-spacing: -0.01em; 
+}
+
+.integ__btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 10px;
+  background: var(--purple-600, #6d28d9);
+  color: #ffffff !important;
   font-size: 15px;
   font-weight: 600;
-  color: var(--purple-600);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  padding: 12px 28px;
+  border-radius: 14px;
   text-decoration: none;
-  transition: color 0.15s;
-  border-bottom: 1.5px solid transparent;
+  box-shadow: 
+    0 4px 12px rgba(109, 40, 217, 0.2),
+    0 12px 28px rgba(109, 40, 217, 0.15);
+  
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              background-color 0.2s ease, 
+              box-shadow 0.2s ease;
 }
-.integ__cta-link:hover { color: var(--purple-700); border-bottom-color: var(--purple-600); }
-.integ__cta-note { font-size: 13px; color: var(--text-3); letter-spacing: -0.01em; max-width: 380px; }
 
-/* Infinite Scroll Math Keys */
+.integ__btn:hover {
+  background: var(--purple-700, #5b21b6);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 16px rgba(109, 40, 217, 0.25),
+    0 16px 36px rgba(109, 40, 217, 0.22);
+}
+
+.integ__btn:active {
+  transform: translateY(0);
+}
+
+.integ__btn-arrow {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+.integ__btn:hover .integ__btn-arrow {
+  transform: translateX(3px); /* Interactive motion trigger */
+}
+
+.integ__cta-note { 
+  font-size: 13px; 
+  color: var(--text-3); 
+  line-height: 1.5;
+  letter-spacing: -0.01em; 
+  max-width: 380px; 
+}
+
+/* Infinite Scroll Engine Keys */
 @keyframes marquee-fwd {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(calc(-50% - 16px)); } /* Calibrated exact match for custom gap step */
+}
+
+/* ── Mobile Layout Enhancements ── */
+@media (max-width: 600px) {
+  .integ { padding: 70px 0 80px; }
+  .integ__container { gap: 40px; }
+  .integ__marquee { gap: 20px; }
+  .integ__chip { padding: 5px 14px 5px 5px; gap: 8px; border-radius: 11px; }
+  .integ__chip-logo-wrap { width: 28px; height: 28px; }
+  .integ__chip-img { width: 20px; height: 20px; }
+  .integ__chip-name { font-size: 14px; }
+  
+  .integ__btn { 
+    width: 100%; /* Spans full width dynamically on compact phones */
+    max-width: 320px; 
+    padding: 14px 24px;
+    border-radius: 12px;
+  }
 }
